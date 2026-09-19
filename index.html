@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gourmet Bistro Order and Revenue Tracker</title>
+</head>
+<body>
+    <div id="home">
+      <br>
+      <nav style="text-align: center">
+        <a href="#home" style="color: black">Home</a> | 
+        <a href="#menu" style="color: black">Menu</a> | 
+        <a href="#order" style="color: black">Order</a> | 
+        <a href="/history" style="color: black">Search History</a>
+      </nav>
+      <br><br>
+      <h1 style="text-align:center">Gourmet Bistro</h1>
+      <p style="text-align:center">Built on fresh ingredients and good company, Gourmet Bistro serves honest, scratch-made meals every single day.</p>
+      
+      <form action="/search" method="GET" style="text-align: center;">
+        <label for="query">Search Menu: </label>
+        <input type="text" id="query" name="query" placeholder="e.g. Steak, Fries" required>
+        <button type="submit">Search</button>
+      </form>
+      <br><br>
+    </div>
+
+    <div id="menu">
+       <h1 style="text-align: center;">Menu</h1>
+       <table style="border: solid; margin: auto;">
+         <tr>
+            <th style="border: solid;">Name</th>
+            <th style="border: solid;">Category</th>
+            <th style="border: solid;">Price</th>
+         </tr>
+         <tr>
+            <td style="border: solid;">Truffle Fries</td>
+            <td style="border: solid;">Starters</td>
+            <td style="border: solid;">$8.50</td>
+         </tr>
+         <tr>
+            <td style="border: solid;">Garlic Butter Steak</td>
+            <td style="border: solid;">Main Course</td>
+            <td style="border: solid;">$24.00</td>
+         </tr>
+         <tr>
+            <td style="border: solid;">Creamy Mushroom Pasta</td>
+            <td style="border: solid;">Main Course</td>
+            <td style="border: solid;">$16.50</td>
+         </tr>
+         <tr>
+            <td style="border: solid;">Chocolate Lava Cake</td>
+            <td style="border: solid;">Desserts</td>
+            <td style="border: solid;">$7.00</td>
+         </tr>
+         <tr>
+            <td style="border: solid;">Iced Lemon Tea</td>
+            <td style="border: solid;">Drinks</td>
+            <td style="border: solid;">$3.50</td>
+         </tr>
+       </table>
+       <br><br>
+    </div>
+
+    <div id="order">
+        <h1 style="text-align: center">Order Form</h1>
+        <!-- Action connects directly to Flask route /review via POST -->
+        <form action="/review" method="POST" style="width: 320px; margin: auto;">
+            <label for="name">Name: </label>
+            <input type="text" id="name" name="customer_name" required><br><br>
+
+            <label for="email">Email: </label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <p><b>Select Food & Quantities:</b></p>
+            <input type="checkbox" id="fries" value="Truffle Fries" name="food_fries">
+            <label for="fries">Truffle Fries </label>
+            <label for="friesQty">Qty: </label>
+            <input type="number" id="friesQty" name="qty_fries" min="1" value="1"><br><br>
+
+            <input type="checkbox" id="steak" value="Garlic Butter Steak" name="food_steak">
+            <label for="steak">Garlic Butter Steak </label>
+            <label for="steakQty">Qty: </label>
+            <input type="number" id="steakQty" name="qty_steak" min="1" value="1"><br><br>
+
+            <input type="checkbox" id="pasta" value="Creamy Mushroom Pasta" name="food_pasta">
+            <label for="pasta">Creamy Mushroom Pasta </label>
+            <label for="pastaQty">Qty: </label>
+            <input type="number" id="pastaQty" name="qty_pasta" min="1" value="1"><br><br>
+
+            <input type="checkbox" id="cake" value="Chocolate Lava Cake" name="food_cake">
+            <label for="cake">Chocolate Lava Cake </label>
+            <label for="cakeQty">Qty: </label>
+            <input type="number" id="cakeQty" name="qty_cake" min="1" value="1"><br><br>
+
+            <input type="checkbox" id="tea" value="Iced Lemon Tea" name="food_tea">
+            <label for="tea">Iced Lemon Tea </label>
+            <label for="teaQty">Qty: </label>
+            <input type="number" id="teaQty" name="qty_tea" min="1" value="1"><br><br>
+
+            <p><b>Add-ons:</b></p>
+            <input type="checkbox" id="sauce" value="Extra Sauce" name="food_sauce">
+            <label for="sauce">Extra Sauce ($1.00) </label>
+            <label for="sauceQty">Qty: </label>
+            <input type="number" id="sauceQty" name="qty_sauce" min="1" value="1"><br><br>
+
+            <input type="checkbox" id="rush" value="Rush Delivery" name="food_rush">
+            <label for="rush">Rush Delivery under 30 mins ($10.00)</label><br><br>
+
+            <button type="submit">Calculate Total & Proceed</button>
+        </form>
+    </div>
+</body>
+</html>
