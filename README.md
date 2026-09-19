@@ -1,27 +1,25 @@
-# Gourmet Bistro Order & Revenue Tracker
+# Gourmet Bistro Order and Revenue Tracker
 
-A full-stack local web application built with Python, HTML5, and SQLite. This project transitions a command-line terminal script into a functional web server that handles menu searches, order calculations, cash payment validation, and sales analytics.
+A web-based order placement and revenue tracking system built with HTML, Python, and SQLite. The application enables customers to search menu items, place orders with quantity-based discounts, process cash or card payments, and allows administrators to view itemized sales reports.
 
----
+## Features
 
-## Key Features & Business Logic
+* **Menu Browsing & Search**: Search across menu items[cite: 1, 2] with automatic retention of the 3 most recent search queries.
+* **Dynamic Order Calculation**: Interactive order form with optional add-ons[cite: 1] that automatically applies a 10% discount for items ordered with a quantity of 3 or more.
+* **Payment Processing**: Supports Cash and Card options, validates cash amount against total cost, prompts re-entry if payment is insufficient, and calculates change.
+* **Database Integration**: Automatically creates and seeds an SQLite database (`bistro_order.db`) with initial menu items and logs submitted orders.
+* **Admin Sales Dashboard**: Secure report route (`/sales?key=admin123`) displaying items sold, quantity counts, and aggregate revenue.
 
-### 1. Menu Search & 3-Item History Buffer (Option 1 & Option 4)
-* **Dynamic Search:** Queries the SQLite database for menu items using case-insensitive SQL matching (`LIKE %query%`).
-* **Ring Buffer History:** Maintains an array in memory that tracks the 3 most recent search terms, automatically cycling out older queries when new ones are made.
+## Tech Stack
 
-### 2. Order Processing & Bulk Discounts (Option 2)
-* **Automated 10% Discount:** Evaluates each selected item's quantity. If quantity $\ge 3$, a 10% discount is applied to that item's total cost (`(unit_price * qty) * 0.90`).
-* **Two-Step Checkout Flow:** Python processes the grand total on a review page before asking for payment input.
-* **Cash Validation & Change Calculation:**
-  * Compares `cash_paid` against `grand_total`.
-  * If `cash_paid < grand_total`, blocks database insertion and displays the remaining balance owed.
-  * If `cash_paid >= grand_total`, calculates exact change due (`cash_paid - grand_total`) and saves the transaction.
+* **Backend Framework**: Python 
+* **Database**: SQLite3
+* **Frontend**: HTML5[cite: 1]
 
-### 3. Sales Revenue Analytics (Option 3)
-* Aggregates revenue data directly from the `orders` table using an optimized SQL query:
-  ```sql
-  SELECT menu_name, SUM(qty) AS total_qty, SUM(total_price) AS total_revenue
-  FROM orders
-  GROUP BY menu_name
-  HAVING SUM(total_price) > 0;
+## Repository Structure
+
+```text
+.
+├── index.html        # Main interface template (Menu, Search, Order Form)
+├── main2.py          # Python application server and database logic
+└── bistro_order.db   # SQLite database (automatically generated on startup)
